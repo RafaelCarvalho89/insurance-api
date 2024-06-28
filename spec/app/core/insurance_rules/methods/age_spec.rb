@@ -82,4 +82,28 @@ module InsuranceRules
       end
     end
   end
+
+  RSpec.describe 'Age Methods age_less_than_61?' do
+    include AgeMethods
+
+    describe '#age_less_than_61?' do
+      context 'when the age is not an integer' do
+        it 'raises an ArgumentError' do
+          expect { age_less_than_61?('35') }.to raise_error(ArgumentError)
+        end
+      end
+
+      context 'when the age is less than 61' do
+        it 'returns true' do
+          expect(age_less_than_61?(60)).to be true
+        end
+      end
+
+      context 'when the age is greater than 61' do
+        it 'returns false' do
+          expect(age_less_than_61?(61)).to be false
+        end
+      end
+    end
+  end
 end
