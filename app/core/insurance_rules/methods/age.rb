@@ -20,5 +20,13 @@ module InsuranceRules
     rescue ArgumentError
       raise ArgumentError, 'Age must be an positive integer'
     end
+
+    def age_between_30_and_40?(age)
+      raise ArgumentError unless age.is_a?(Integer) && age_zero_or_more?(age)
+
+      age.between?(30, 40)
+    rescue ArgumentError
+      raise ArgumentError, 'Age must be an positive integer'
+    end
   end
 end
