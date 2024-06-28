@@ -4,7 +4,6 @@
 module InsuranceRules
   # Methods module
   module AgeMethods
-    # Returns true if the age is more than -1
     def age_zero_or_more?(age)
       raise ArgumentError unless age.is_a?(Integer)
 
