@@ -16,7 +16,7 @@ end
 
 group :development, :test do
   gem 'dotenv'
-  gem 'rack-test', group: :test
+  gem 'rack-test'
   gem 'rspec'
   gem 'simplecov', require: false
 end
