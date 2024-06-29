@@ -12,15 +12,15 @@ RSpec.describe RequiredValidation do
 
   describe '# validate' do
     it 'raises an ArgumentError' do
-      rule = described_class.new(key_param, value_param, rule_param)
-      expect { rule.validate }.to raise_error(ArgumentError, "#{key_param} is required")
+      validator = described_class.new(key_param, value_param, rule_param)
+      expect { validator.validate }.to raise_error(ArgumentError, "#{key_param} is required")
     end
   end
 
   it 'does not raise an error if the value is not nil' do
     valid_value_param_list.each do |value|
-      rule = described_class.new(key_param, value, rule_param)
-      expect { rule.validate }.not_to raise_error
+      validator = described_class.new(key_param, value, rule_param)
+      expect { validator.validate }.not_to raise_error
     end
   end
 end

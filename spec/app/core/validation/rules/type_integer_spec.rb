@@ -13,14 +13,14 @@ RSpec.describe TypeIntegerValidation do
   describe '# validate' do
     it 'raises an ArgumentError' do
       invalid_value_param_list.each do |value|
-        rule = described_class.new(key_param, value, rule_param)
-        expect { rule.validate }.to raise_error(ArgumentError, "#{key_param} must be an integer")
+        validator = described_class.new(key_param, value, rule_param)
+        expect { validator.validate }.to raise_error(ArgumentError, "#{key_param} must be an integer")
       end
     end
 
     it 'does not raise an error if the value is an integer' do
-      rule = described_class.new(key_param, value_param, rule_param)
-      expect { rule.validate }.not_to raise_error
+      validator = described_class.new(key_param, value_param, rule_param)
+      expect { validator.validate }.not_to raise_error
     end
   end
 end
