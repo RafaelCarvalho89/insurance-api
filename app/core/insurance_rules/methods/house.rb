@@ -4,8 +4,12 @@
 module InsuranceRules
   # HouseMethods module
   module HouseMethods
+    OWNERSHIP_STATUS_LIST = %w[owned rented].freeze
+
+    OWNERSHIP_STATUS = OWNERSHIP_STATUS_LIST.map { |status| [status.to_sym, status] }.to_h.freeze
+
     def ownership_status?(ownership_status)
-      %w[owned rented].include?(ownership_status)
+      OWNERSHIP_STATUS_LIST.include?(ownership_status)
     end
 
     def validate_house_input(house)
@@ -29,7 +33,7 @@ module InsuranceRules
     def rented?(ownership_status)
       raise ArgumentError unless ownership_status?(ownership_status)
 
-      ownership_status == 'rented'
+      ownership_status == OWNERSHIP_STATUS[:rented]
     rescue ArgumentError
       raise ArgumentError, 'Ownership status must be a valid status of owned or rented'
     end

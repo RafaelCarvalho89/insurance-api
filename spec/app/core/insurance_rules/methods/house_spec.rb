@@ -5,7 +5,7 @@ require 'spec_helper'
 require_relative '../../../../../app/core/insurance_rules/methods/house'
 
 module InsuranceRules
-  RSpec.describe 'House Methods house?' do # rubocop:disable Metrics/BlockLength
+  RSpec.describe HouseMethods do # rubocop:disable Metrics/BlockLength
     include HouseMethods
 
     let(:invalid_ownership_status_list) { [{}, [], 1, 'invalid_status', true, false, nil] }
