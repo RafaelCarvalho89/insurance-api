@@ -5,14 +5,22 @@ require 'spec_helper'
 require_relative '../../../../../app/core/validation/rules/required'
 
 RSpec.describe RequiredValidation do
-  let(:key_value) { 'key' }
-  let(:value_value) { nil }
-  let(:rule_value) { nil }
+  let(:key_param) { 'key' }
+  let(:value_param) { nil }
+  let(:rule_param) { nil }
+  let(:valid_value_param_list) { [1, 1.0, true, false, [], {}, 'value'] }
 
   describe '# validate' do
     it 'raises an ArgumentError' do
-      rule = RequiredValidation.new(key_value, value_value, rule_value)
-      expect { rule.validate }.to raise_error(ArgumentError)
+      rule = described_class.new(key_param, value_param, rule_param)
+      expect { rule.validate }.to raise_error(ArgumentError, "#{key_param} is required")
+    end
+  end
+
+  it 'does not raise an error if the value is not nil' do
+    valid_value_param_list.each do |value|
+      rule = described_class.new(key_param, value, rule_param)
+      expect { rule.validate }.not_to raise_error
     end
   end
 end

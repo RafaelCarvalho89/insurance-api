@@ -6,8 +6,9 @@ require_relative '../../../../../app/core/validation/rules/type_string'
 
 RSpec.describe TypeStringValidation do
   let(:key_param) { 'key' }
-  let(:invalid_value_param_list) { [1, 1.0, true, false, nil, [], {}] }
+  let(:value_param) { 'value' }
   let(:rule_param) { nil }
+  let(:invalid_value_param_list) { [1, 1.0, true, false, nil, [], {}] }
 
   describe '#validate' do
     it 'raises an error if the value is not a string' do
@@ -18,8 +19,7 @@ RSpec.describe TypeStringValidation do
     end
 
     it 'does not raise an error if the value is a string' do
-      value = 'value'
-      rule = described_class.new(key_param, value, rule_param)
+      rule = described_class.new(key_param, value_param, rule_param)
       expect { rule.validate }.not_to raise_error
     end
   end
