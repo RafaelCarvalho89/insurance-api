@@ -8,21 +8,14 @@ module InsuranceRules
   RSpec.describe AgeMethods do # rubocop:disable Metrics/BlockLength
     include AgeMethods
 
-    describe '#age_zero_or_more?' do
-      it 'raises an ArgumentError when the age is not an integer' do
-        expect { age_zero_or_more?('0') }.to raise_error(ArgumentError)
-      end
-
-      it 'returns true when the age is zero or more' do
-        expect(age_zero_or_more?(0)).to be true
-      end
-
-      it 'returns false when the age is negative' do
-        expect(age_zero_or_more?(-1)).to be false
+    describe '#validate_age_input' do
+      it 'raises an ArgumentError when the age is not an integer or is negative' do
+        expect { validate_age_input('0') }.to raise_error(ArgumentError)
+        expect { validate_age_input(-1) }.to raise_error(ArgumentError)
       end
     end
 
-    describe '#age_less_than_30?' do
+    describe '# age_less_than_30?' do
       it 'raises an ArgumentError when the age is not an integer' do
         expect { age_less_than_30?('25') }.to raise_error(ArgumentError)
       end
@@ -36,9 +29,9 @@ module InsuranceRules
       end
     end
 
-    describe '#age_between_30_and_40?' do
+    describe '# age_between_30_and_40?' do
       it 'raises an ArgumentError when the age is not an integer' do
-        expect { age_between_30_and_40?('35') }.to raise_error(ArgumentError)
+        expect { age_between_30_and_40?('25') }.to raise_error(ArgumentError)
       end
 
       it 'returns true when the age is between 30 and 40' do
@@ -51,7 +44,7 @@ module InsuranceRules
       end
     end
 
-    describe '#age_less_than_61?' do
+    describe '# age_less_than_61?' do
       it 'raises an ArgumentError when the age is not an integer' do
         expect { age_less_than_61?('61') }.to raise_error(ArgumentError)
       end

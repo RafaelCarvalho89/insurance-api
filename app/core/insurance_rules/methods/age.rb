@@ -4,36 +4,30 @@
 module InsuranceRules
   # Methods module
   module AgeMethods
-    def age_zero_or_more?(age)
-      raise ArgumentError unless age.is_a?(Integer)
-
-      age >= 0
-    rescue ArgumentError
-      raise ArgumentError, 'Age must be an integer'
+    def validate_age_input(age)
+      raise ArgumentError, 'Age must be an integer' unless age.is_a?(Integer)
+      raise ArgumentError, 'Age must be an non-negative integer' unless age >= 0
     end
 
     def age_less_than_30?(age)
-      raise ArgumentError unless age.is_a?(Integer) && age_zero_or_more?(age)
-
+      validate_age_input(age)
       age < 30
-    rescue ArgumentError
-      raise ArgumentError, 'Age must be an positive integer'
+    rescue ArgumentError => e
+      raise ArgumentError, e.message
     end
 
     def age_between_30_and_40?(age)
-      raise ArgumentError unless age.is_a?(Integer) && age_zero_or_more?(age)
-
+      validate_age_input(age)
       age.between?(30, 40)
-    rescue ArgumentError
-      raise ArgumentError, 'Age must be an positive integer'
+    rescue ArgumentError => e
+      raise ArgumentError, e.message
     end
 
     def age_less_than_61?(age)
-      raise ArgumentError unless age.is_a?(Integer) && age_zero_or_more?(age)
-
+      validate_age_input(age)
       age < 61
-    rescue ArgumentError
-      raise ArgumentError, 'Age must be an positive integer'
+    rescue ArgumentError => e
+      raise ArgumentError, e.message
     end
   end
 end
