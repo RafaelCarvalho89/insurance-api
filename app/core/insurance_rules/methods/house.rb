@@ -8,12 +8,22 @@ module InsuranceRules
       %w[owned rented].include?(ownership_status)
     end
 
-    def house?(house)
-      raise ArgumentError unless house.is_a?(Hash) && ownership_status?(house[:ownership_status]) || house.nil?
-
-      house.is_a?(Hash) && ownership_status?(house[:ownership_status])
+    def validate_house_input(house)
+      unless [
+        house.nil?,
+        house.is_a?(Hash) && house.key?(:ownership_status) && ownership_status?(house[:ownership_status])
+      ].any?
+        raise ArgumentError
+      end
     rescue ArgumentError
-      raise ArgumentError, 'House must be a hash with a valid ownership_status'
+      raise ArgumentError, 'House must be a hash with a key ownership_status of owned or rented'
+    end
+
+    def house?(house)
+      validate_house_input(house)
+      house.is_a?(Hash) && ownership_status?(house[:ownership_status])
+    rescue ArgumentError => e
+      raise ArgumentError, e.message
     end
 
     def rented?(ownership_status)
@@ -21,7 +31,7 @@ module InsuranceRules
 
       ownership_status == 'rented'
     rescue ArgumentError
-      raise ArgumentError, 'Ownership status must be a valid status'
+      raise ArgumentError, 'Ownership status must be a valid status of owned or rented'
     end
   end
 end
