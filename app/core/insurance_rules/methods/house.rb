@@ -4,10 +4,6 @@
 module InsuranceRules
   # HouseMethods module
   module HouseMethods
-    OWNERSHIP_STATUS_LIST = %w[owned rented].freeze
-
-    OWNERSHIP_STATUS = OWNERSHIP_STATUS_LIST.map { |status| [status.to_sym, status] }.to_h.freeze
-
     def ownership_status?(ownership_status)
       OWNERSHIP_STATUS_LIST.include?(ownership_status)
     end

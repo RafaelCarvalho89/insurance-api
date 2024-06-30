@@ -3,9 +3,6 @@
 # InsuranceRules module
 module InsuranceRules
   # IncomeMethods module
-  HIGHEST_INCOME = 200_000
-
-  # IncomeMethods module
   module IncomeMethods
     def validate_income_input(income)
       raise ArgumentError, 'Income must be an integer' unless income.is_a?(Integer)
