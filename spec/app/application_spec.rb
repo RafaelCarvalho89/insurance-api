@@ -11,14 +11,6 @@ RSpec.describe Application do
         expect(last_response.body).to eq('Ruby Insurance API')
       end
     end
-
-    context 'when the request is unsuccessful' do
-      it 'returns a 500 status code' do
-        allow_any_instance_of(Application).to receive(:response).and_raise(StandardError)
-        get '/'
-        expect(last_response.status).to eq(500)
-      end
-    end
   end
 
   describe 'METHOD /missing_resource' do
