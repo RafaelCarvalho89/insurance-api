@@ -15,73 +15,53 @@ RSpec.describe Validator do # rubocop:disable Metrics/BlockLength
   describe '#valid_rule?' do # rubocop:disable Metrics/BlockLength
     subject { described_class.new(validations) }
 
-    context 'when rule is a valid symbol' do
-      it 'returns true' do
-        Validator::RULES_MAPPING.each_key do |rule|
-          expect(subject.valid_rule?(rule)).to be true
+    context 'when the rule is a valid Symbol' do
+      it 'returns true for valid symbol rules' do
+        valid_symbols = Validator::RULES_MAPPING.keys
+
+        valid_symbols.each do |symbol|
+          expect(subject.send(:valid_rule?, symbol)).to be true
         end
       end
     end
 
-    context 'when rule is a valid hash' do
+    context 'when the rule is a valid Hash' do
       it 'returns true for valid hash rules' do
-        expect(subject.valid_rule?(min: 18)).to be true
-        expect(subject.valid_rule?(max: 150_000)).to be true
+        valid_hashes = Validator::RULES_MAPPING.keys.map { |key| { key => nil } }
+
+        valid_hashes.each do |hash|
+          expect(subject.send(:valid_rule?, hash)).to be true
+        end
       end
     end
 
-    context 'when rule is an invalid symbol' do
-      it 'returns false' do
-        expect(subject.valid_rule?(:unknown_rule)).to be false
+    context 'when the rule is an invalid Symbol' do
+      it 'returns false for invalid symbol rules' do
+        invalid_symbols = %i[unknown_rule another_invalid_rule]
+
+        invalid_symbols.each do |symbol|
+          expect(subject.send(:valid_rule?, symbol)).to be false
+        end
       end
     end
 
-    context 'when rule is an invalid hash' do
-      it 'returns false' do
-        expect(subject.valid_rule?(unknown_rule: 'any_value')).to be false
+    context 'when the rule is an invalid Hash' do
+      it 'returns false for invalid hash rules' do
+        invalid_hashes = [{ unknown_rule: nil }, { another_invalid_rule: nil }]
+
+        invalid_hashes.each do |hash|
+          expect(subject.send(:valid_rule?, hash)).to be false
+        end
       end
     end
 
-    context 'when rule is an invalid type' do
-      it 'returns false' do
-        expect(subject.valid_rule?(42)).to be false
-      end
-    end
-  end
+    context 'when the rule is not a Symbol or Hash' do
+      it 'returns false for invalid types' do
+        invalid_types = [42, 'string', 3.14, [], Object.new]
 
-  describe '#validate_key_rules' do # rubocop:disable Metrics/BlockLength
-    subject { described_class.new(validations) }
-
-    context 'when all rules are valid' do
-      it 'does not raise an error for valid rules' do
-        valid_rule_list = %i[required type_string]
-        expect { subject.send(:validate_key_rules, valid_rule_list) }.not_to raise_error
-
-        valid_rule_list = [:type_integer, { min: 18 }]
-        expect { subject.send(:validate_key_rules, valid_rule_list) }.not_to raise_error
-
-        valid_rule_list = [{ max: 150_000 }]
-        expect { subject.send(:validate_key_rules, valid_rule_list) }.not_to raise_error
-      end
-    end
-
-    context 'when there are invalid rules' do
-      it 'raises an error for invalid symbol rules' do
-        invalid_rule_list = %i[required unknown_rule]
-        expect { subject.send(:validate_key_rules, invalid_rule_list) }
-          .to raise_error(ArgumentError, 'unknown_rule validation is not supported')
-      end
-
-      it 'raises an error for invalid hash rules' do
-        invalid_rule_list = [:type_integer, { unknown_rule: 'any_value' }]
-        expect { subject.send(:validate_key_rules, invalid_rule_list) }
-          .to raise_error(ArgumentError, '{:unknown_rule=>"any_value"} validation is not supported')
-      end
-
-      it 'raises an error for invalid types' do
-        invalid_rule_list = [42]
-        expect { subject.send(:validate_key_rules, invalid_rule_list) }
-          .to raise_error(ArgumentError, '42 validation is not supported')
+        invalid_types.each do |invalid_type|
+          expect(subject.send(:valid_rule?, invalid_type)).to be false
+        end
       end
     end
   end

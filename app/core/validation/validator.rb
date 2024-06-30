@@ -11,10 +11,6 @@ require_relative 'rules/type_string'
 
 # Validator class
 class Validator
-  RULE_CLASS_LIST = %i[Symbol Hash].freeze
-
-  RULE_CLASS_MAPPING = RULE_CLASS_LIST.map { |class_name| [class_name.to_sym, class_name] }.to_h.freeze
-
   RULES_MAPPING = {
     required: RequiredValidation,
     type_integer: TypeIntegerValidation,
@@ -31,27 +27,35 @@ class Validator
   end
 
   def call(params)
-    @validations.each_value do |rule_list|
-      validate_key_rules(rule_list)
+    @validations.each do |key, rule_list|
+      rule_list.each do |rule|
+        validate_rule(key, rule, params)
+      end
     end
   end
 
+  private
+
   def valid_rule?(rule)
-    case rule.class.to_s
-    when 'Symbol'
+    case rule
+    when Symbol
       RULES_MAPPING.key?(rule)
-    when 'Hash'
+    when Hash
       RULES_MAPPING.key?(rule.keys.first)
     else
       false
     end
   end
 
-  private
+  def validate_rule(key, rule, params)
+    raise ArgumentError, "#{rule} validation is not supported" unless valid_rule?(rule)
 
-  def validate_key_rules(rule_list)
-    rule_list.each do |rule|
-      raise ArgumentError, "#{rule} validation is not supported" unless valid_rule?(rule)
+    case rule
+    when Symbol
+      RULES_MAPPING[rule].new.validate(params[key])
+    when Hash
+      rule_name, rule_options = rule.first
+      RULES_MAPPING[rule_name].new(rule_options).validate(params[key])
     end
   end
 end
