@@ -38,7 +38,7 @@ class HomeInsuranceRiskScorer
       { condition: age_less_than_30?(@age), point: -2 },
       { condition: age_between_30_and_40?(@age), point: -1 },
       { condition: income_more_than_200_000?(@income), point: -1 },
-      { condition: house?(@house) && rented?(@house[:ownership_status]), point: +1 },
+      { condition: house?(@house) && rented?(@house[:ownership_status]), point: +1 }
     ]
   end
 
