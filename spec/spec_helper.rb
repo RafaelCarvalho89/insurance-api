@@ -8,7 +8,11 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 
+ENV['RACK_ENV'] = 'test'
+
 require_relative '../app/application'
+
+Dir[File.expand_path('../app/core/**/*.rb', __dir__)].each { |f| require f }
 
 module RSpecMixin
   include Rack::Test::Methods
@@ -16,8 +20,6 @@ module RSpecMixin
     Application.new
   end
 end
-
-Dir[File.expand_path('../app/core/**/*.rb', __dir__)].each { |f| require f }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
