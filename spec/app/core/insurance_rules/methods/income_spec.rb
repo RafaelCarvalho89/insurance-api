@@ -6,7 +6,7 @@ require_relative '../../../../../app/core/insurance_rules/methods/income'
 
 module InsuranceRules
   RSpec.describe IncomeMethods do # rubocop:disable Metrics/BlockLength
-    include IncomeMethods
+    include InsuranceRules::IncomeMethods
 
     describe '# validate_income_input' do
       it 'raises an ArgumentError when the income is not an integer or is negative' do
