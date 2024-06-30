@@ -17,7 +17,7 @@ module RSpecMixin
   end
 end
 
-Dir[File.expand_path('../app/services/**/*.rb', __dir__)].each { |f| require f }
+Dir[File.expand_path('../app/core/**/*.rb', __dir__)].each { |f| require f }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
