@@ -55,7 +55,7 @@ RSpec.describe DisabilityInsuranceEligibilizer do # rubocop:disable Metrics/Bloc
         end
       end
 
-      it 'raise an error for house is invalid age' do
+      it 'raise an error for age is invalid type' do
         invalid_age_list.each do |invalid_age|
           params = { income: 00_000, vehicle:, house:, age: invalid_age }
           allow(validator_service).to receive(:call).with(params).and_return(false)
