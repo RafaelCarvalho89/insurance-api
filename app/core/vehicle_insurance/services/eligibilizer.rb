@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../../insurance_rules/module'
+require_relative '../../insurance_rules/methods/income'
+require_relative '../../insurance_rules/methods/vehicle'
+require_relative '../../insurance_rules/methods/house'
 
 # VehicleInsuranceEligibilizer class
 class VehicleInsuranceEligibilizer
