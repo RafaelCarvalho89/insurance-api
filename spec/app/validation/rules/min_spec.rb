@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../../../../../app/core/validation/rules/min'
+require_relative '../../../../app/validation/rules/min'
 
 RSpec.describe MinValidation do
   let(:key_param) { 'key' }

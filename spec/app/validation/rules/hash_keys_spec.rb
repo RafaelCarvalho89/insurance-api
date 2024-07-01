@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../../../../../app/core/validation/rules/hash_keys'
+require_relative '../../../../app/validation/rules/hash_keys'
 
 RSpec.describe HashKeysValidation do
   let(:key_param) { 'key' }

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../../../../../app/core/validation/rules/type_string'
+require_relative '../../../../app/validation/rules/type_string'
 
 RSpec.describe TypeStringValidation do
   let(:key_param) { 'key' }

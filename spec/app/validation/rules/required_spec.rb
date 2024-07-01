@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../../../../../app/core/validation/rules/required'
+require_relative '../../../../app/validation/rules/required'
 
 RSpec.describe RequiredValidation do
   let(:key_param) { 'key' }
