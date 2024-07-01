@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../rule'
+
 # HashKeysValidation class
 class HashKeysValidation < ValidationRule
   def validate

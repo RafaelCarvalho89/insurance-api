@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../../../../../app/core/validation/rules/type_integer'
+require_relative '../../../../app/validation/rules/type_integer'
 
 RSpec.describe TypeIntegerValidation do
   let(:key_param) { 'key' }

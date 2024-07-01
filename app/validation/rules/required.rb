@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../rule'
+
 # RequiredValidation class
 class RequiredValidation < ValidationRule
   def validate

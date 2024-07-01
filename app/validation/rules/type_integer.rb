@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../rule'
+
 # TypeIntegerValidation class
 class TypeIntegerValidation < ValidationRule
   def validate

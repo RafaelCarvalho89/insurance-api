@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../../../../app/core/validation/rule'
+require_relative '../../../app/validation/rule'
 
 # ValidationRule class
 RSpec.describe ValidationRule do

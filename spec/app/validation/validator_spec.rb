@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../../../../app/core/validation/rules/hash_keys'
-require_relative '../../../../app/core/validation/rules/in'
-require_relative '../../../../app/core/validation/rules/max'
-require_relative '../../../../app/core/validation/rules/min'
-require_relative '../../../../app/core/validation/rules/required'
-require_relative '../../../../app/core/validation/rules/type_hash'
-require_relative '../../../../app/core/validation/rules/type_integer'
-require_relative '../../../../app/core/validation/rules/type_string'
-require_relative '../../../../app/core/validation/validator'
+require_relative '../../../app/validation/rules/hash_keys'
+require_relative '../../../app/validation/rules/in'
+require_relative '../../../app/validation/rules/max'
+require_relative '../../../app/validation/rules/min'
+require_relative '../../../app/validation/rules/required'
+require_relative '../../../app/validation/rules/type_hash'
+require_relative '../../../app/validation/rules/type_integer'
+require_relative '../../../app/validation/rules/type_string'
+require_relative '../../../app/validation/validator'
 
 RSpec.describe Validator do # rubocop:disable Metrics/BlockLength
   let(:validations) do

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../../../../../app/core/validation/rules/type_hash'
+require_relative '../../../../app/validation/rules/type_hash'
 
 RSpec.describe TypeHashValidation do
   let(:key_param) { 'key' }

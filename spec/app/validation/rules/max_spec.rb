@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-require_relative '../../../../../app/core/validation/rules/max'
+require_relative '../../../../app/validation/rules/max'
 
 RSpec.describe MaxValidation do
   let(:key_param) { 'key' }

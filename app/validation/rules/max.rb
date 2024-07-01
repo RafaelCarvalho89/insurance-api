@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../rule'
+
 # MaxValidation class
 class MaxValidation < ValidationRule
   def validate
